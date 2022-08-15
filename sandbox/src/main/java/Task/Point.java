@@ -1,3 +1,5 @@
+package Task;
+
 public class Point {
 
     public double p1;
@@ -8,8 +10,8 @@ public class Point {
         this.p2 = p2;
     }
 
-    public double distance(Point a, Point b) {
-        return Math.sqrt((a.p1 - b.p1) * (a.p1 - b.p1) + (a.p2 - b.p2) * (a.p2 - b.p2));
+    public double distance(Point p2) {
+        return Math.sqrt((this.p1 - p2.p1) * (this.p1 - p2.p1) + (this.p2 - p2.p2) * (this.p2 - p2.p2));
     }
 
 }
