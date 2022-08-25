@@ -1,15 +1,15 @@
 package addressbook;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
+import static org.testng.Assert.assertTrue;
+
 public class TestBase {
     protected WebDriver wd;
+    private boolean acceptNextAlert = true;
 
     @BeforeMethod(alwaysRun = true)
     public void setUp() throws Exception {
@@ -98,7 +98,7 @@ public class TestBase {
       wd.findElement(By.name("email")).sendKeys(contactData.getEmail());
     }
 
-    protected void gotoContactPage() {
+    protected void gotoAddNewContact() {
       wd.findElement(By.linkText("add new")).click();
     }
 
@@ -108,5 +108,44 @@ public class TestBase {
 
     protected void gotoHomePage() {
       wd.findElement(By.linkText("home page")).click();
+    }
+
+    protected void nextAlertIsTrue() {
+      acceptNextAlert = true;
+    }
+
+    protected void accessContactsDeletion() {
+      assertTrue(closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));
+    }
+
+    protected void submitContactsDeletion() {
+      wd.findElement(By.xpath("//input[@value='Delete']")).click();
+    }
+
+    protected void chooseCheckBox() {
+      wd.findElement(By.name("selected[]")).click();
+    }
+
+    protected void gotoHome() {
+      wd.findElement(By.linkText("home")).click();
+    }
+
+    private String closeAlertAndGetItsText() {
+      try {
+        Alert alert = wd.switchTo().alert();
+        String alertText = ((Alert) alert).getText();
+        if (acceptNextAlert) {
+          alert.accept();
+        } else {
+          alert.dismiss();
+        }
+        return alertText;
+      } finally {
+        nextAlertIsTrue();
+      }
+    }
+
+    protected void submitGroupsDeletion() {
+      wd.findElement(By.xpath("//input[5]")).click();
     }
 }
