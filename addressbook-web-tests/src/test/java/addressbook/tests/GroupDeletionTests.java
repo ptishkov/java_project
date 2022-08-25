@@ -1,13 +1,14 @@
-package addressbook;
+package addressbook.tests;
 
 import org.testng.annotations.*;
 
 public class GroupDeletionTests extends TestBase {
   @Test
   public void testGroupDeletion() throws Exception {
-    gotoGroupPage();
-    chooseCheckBox();
-    submitGroupsDeletion();
+    app.gotoGroupPage();
+    app.chooseCheckBox();
+    app.submitGroupsDeletion();
+    app.gotoGroupPage();
   }
 
 }

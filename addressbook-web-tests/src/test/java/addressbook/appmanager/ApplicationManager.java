@@ -1,22 +1,20 @@
-package addressbook;
+package addressbook.appmanager;
 
+import addressbook.model.ContactData;
+import addressbook.model.GroupData;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 
 import static org.testng.Assert.assertTrue;
 
-public class TestBase {
-    protected WebDriver wd;
+public class ApplicationManager {
+    public WebDriver wd;
     private boolean acceptNextAlert = true;
 
-    @BeforeMethod(alwaysRun = true)
-    public void setUp() throws Exception {
-      wd = new ChromeDriver();
-      wd.get("http://localhost/addressbook/");
-      login("admin", "secret");
-
+    public void init() {
+        wd = new ChromeDriver();
+        wd.get("http://localhost/addressbook/");
+        login("admin", "secret");
     }
 
     private void login(String username, String password) {
@@ -28,15 +26,11 @@ public class TestBase {
       wd.findElement(By.xpath("//input[@value='Login']")).click();
     }
 
-    protected void returnToGroupPage() {
-      wd.findElement(By.linkText("group page")).click();
-    }
-
-    protected void submitGroupCreation() {
+    public void submitGroupCreation() {
       wd.findElement(By.name("submit")).click();
     }
 
-    protected void fillGroupForm(GroupData groupData) {
+    public void fillGroupForm(GroupData groupData) {
       wd.findElement(By.name("group_name")).click();
       wd.findElement(By.name("group_name")).clear();
       wd.findElement(By.name("group_name")).sendKeys(groupData.getName());
@@ -48,17 +42,16 @@ public class TestBase {
       wd.findElement(By.name("group_footer")).sendKeys(groupData.getFooter());
     }
 
-    protected void initGroupCreation() {
+    public void initGroupCreation() {
       wd.findElement(By.name("new")).click();
     }
 
-    protected void gotoGroupPage() {
+    public void gotoGroupPage() {
       wd.findElement(By.linkText("groups")).click();
     }
 
-    @AfterMethod(alwaysRun = true)
-    public void tearDown() throws Exception {
-      wd.quit();
+    public void stop() {
+        wd.quit();
     }
 
     private boolean isElementPresent(By by) {
@@ -79,7 +72,7 @@ public class TestBase {
       }
     }
 
-    protected void fillContactForm(ContactData contactData) {
+    public void fillContactForm(ContactData contactData) {
       wd.findElement(By.name("firstname")).click();
       wd.findElement(By.name("firstname")).clear();
       wd.findElement(By.name("firstname")).sendKeys(contactData.getFirstname());
@@ -98,35 +91,35 @@ public class TestBase {
       wd.findElement(By.name("email")).sendKeys(contactData.getEmail());
     }
 
-    protected void gotoAddNewContact() {
+    public void gotoAddNewContact() {
       wd.findElement(By.linkText("add new")).click();
     }
 
-    protected void submitContactCreation() {
+    public void submitContactCreation() {
       wd.findElement(By.xpath("//input[21]")).click();
     }
 
-    protected void gotoHomePage() {
+    public void gotoHomePage() {
       wd.findElement(By.linkText("home page")).click();
     }
 
-    protected void nextAlertIsTrue() {
+    public void nextAlertIsTrue() {
       acceptNextAlert = true;
     }
 
-    protected void accessContactsDeletion() {
+    public void accessContactsDeletion() {
       assertTrue(closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));
     }
 
-    protected void submitContactsDeletion() {
+    public void submitContactsDeletion() {
       wd.findElement(By.xpath("//input[@value='Delete']")).click();
     }
 
-    protected void chooseCheckBox() {
+    public void chooseCheckBox() {
       wd.findElement(By.name("selected[]")).click();
     }
 
-    protected void gotoHome() {
+    public void gotoHome() {
       wd.findElement(By.linkText("home")).click();
     }
 
@@ -145,7 +138,7 @@ public class TestBase {
       }
     }
 
-    protected void submitGroupsDeletion() {
+    public void submitGroupsDeletion() {
       wd.findElement(By.xpath("//input[5]")).click();
     }
 }
