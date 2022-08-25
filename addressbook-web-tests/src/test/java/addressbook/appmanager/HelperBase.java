@@ -28,7 +28,7 @@ public class HelperBase {
     public String closeAlertAndGetItsText() {
         try {
             Alert alert = wd.switchTo().alert();
-            String alertText = ((Alert) alert).getText();
+            String alertText = alert.getText();
             if (acceptNextAlert) {
                 alert.accept();
             } else {
