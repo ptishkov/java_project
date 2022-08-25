@@ -1,6 +1,6 @@
 package addressbook;
 
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 public class GroupDeletionTests extends TestBase {
   @Test
