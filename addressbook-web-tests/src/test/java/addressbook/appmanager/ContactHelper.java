@@ -30,4 +30,12 @@ public class ContactHelper extends HelperBase {
     public void accessContactsDeletion() {
         assertTrue(closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));
     }
+
+    public void initContactModification() {
+        click(By.cssSelector("img[alt=\"Edit\"]"));
+    }
+
+    public void submitContactModification() {
+        click(By.name("update"));
+    }
 }
