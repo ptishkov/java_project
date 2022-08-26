@@ -33,4 +33,8 @@ public class GroupHelper extends HelperBase {
     public void submitGroupModification() {
         click(By.name("update"));
     }
+
+    public void tickFirstGroup() {
+        click(By.name("selected[]"));
+    }
 }

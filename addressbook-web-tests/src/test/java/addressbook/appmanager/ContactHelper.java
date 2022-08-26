@@ -38,4 +38,8 @@ public class ContactHelper extends HelperBase {
     public void submitContactModification() {
         click(By.name("update"));
     }
+
+    public void tickFirstContact() {
+        click(By.name("selected[]"));
+    }
 }
