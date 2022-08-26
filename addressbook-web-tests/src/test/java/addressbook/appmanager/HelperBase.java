@@ -2,6 +2,7 @@ package addressbook.appmanager;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
 public class HelperBase {
@@ -37,6 +38,15 @@ public class HelperBase {
             return alertText;
         } finally {
             nextAlertIsTrue();
+        }
+    }
+
+    protected boolean isElementPresent(By locator) {
+        try {
+            wd.findElement(locator);
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
         }
     }
 }
