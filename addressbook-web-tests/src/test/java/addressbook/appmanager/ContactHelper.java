@@ -27,6 +27,13 @@ public class ContactHelper extends HelperBase {
         }
     }
 
+    public void gotoAddNewContact() {
+        click(By.linkText("add new"));
+    }
+
+    public void gotoHomePage() {
+        click(By.linkText("home page"));
+    }
     public void submitContactCreation() {
         click(By.xpath("//input[21]"));
     }
@@ -50,4 +57,20 @@ public class ContactHelper extends HelperBase {
     public void tickFirstContact() {
         click(By.name("selected[]"));
     }
+
+    public boolean isContactCreated() {
+        if (isElementPresent(By.name("selected[]"))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void createContact(ContactData contactData, boolean b) {
+        gotoAddNewContact();
+        fillContactForm(contactData, b);
+        submitContactCreation();
+        gotoHomePage();
+    }
+
 }

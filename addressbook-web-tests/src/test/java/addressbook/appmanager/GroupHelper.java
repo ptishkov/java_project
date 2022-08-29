@@ -37,4 +37,12 @@ public class GroupHelper extends HelperBase {
     public void tickFirstGroup() {
         click(By.name("selected[]"));
     }
+
+    public void gotoAddNewContact() {
+        click(By.linkText("add new"));
+    }
+
+    public void gotoHomePage() {
+        click(By.linkText("home page"));
+    }
 }

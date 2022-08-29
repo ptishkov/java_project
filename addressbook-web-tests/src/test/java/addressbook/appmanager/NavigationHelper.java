@@ -13,14 +13,6 @@ public class NavigationHelper extends HelperBase {
         click(By.linkText("groups"));
     }
 
-    public void gotoAddNewContact() {
-        click(By.linkText("add new"));
-    }
-
-    public void gotoHomePage() {
-        click(By.linkText("home page"));
-    }
-
     public void gotoHome() {
         click(By.linkText("home"));
     }

@@ -15,4 +15,11 @@ public class SessionHelper extends HelperBase {
         click(By.xpath("//input[@value='Login']"));
     }
 
+    public void gotoAddNewContact() {
+        click(By.linkText("add new"));
+    }
+
+    public void gotoHomePage() {
+        click(By.linkText("home page"));
+    }
 }
