@@ -28,6 +28,10 @@ public class GroupHelper extends HelperBase {
         click(By.xpath("//input[5]"));
     }
 
+    public void returnToGroupPage() {
+        click(By.linkText("group page"));
+    }
+
     public void initGroupModification() { click(By.name("edit")); }
 
     public void submitGroupModification() {
@@ -38,11 +42,18 @@ public class GroupHelper extends HelperBase {
         click(By.name("selected[]"));
     }
 
-    public void gotoAddNewContact() {
-        click(By.linkText("add new"));
+    public void createGroup(GroupData groupData) {
+        initGroupCreation();
+        fillGroupForm(new GroupData("1234", "1234", "1234"));
+        submitGroupCreation();
+        returnToGroupPage();
     }
 
-    public void gotoHomePage() {
-        click(By.linkText("home page"));
+    public boolean isGroupCreated() {
+        if (isElementPresent(By.name("selected[]"))) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
