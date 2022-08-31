@@ -5,11 +5,11 @@ import org.testng.annotations.*;
 
 public class ContactDeletionTests extends TestBase {
   @Test
-  public void testContactDeletion() throws Exception {
+  public void testContactDeletion() {
     app.getNavigationHelper().gotoHome();
     if (! app.getContactHelper().isContactCreated()) {
       app.getContactHelper().createContact(new ContactData("Name", "LastName",
-              "Saint-Petersburg", "+79215553322", "ptishkov@baltbet.ru", "3333"), true);
+              "Saint-Petersburg", "+79215553322", "ptishkov@baltbet.ru", "3333"));
     }
     app.getContactHelper().tickFirstContact();
     app.getContactHelper().submitContactsDeletion();

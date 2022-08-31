@@ -14,12 +14,8 @@ public class ContactHelper extends HelperBase {
         super(wd);
     }
 
-    public void fillContactForm(ContactData contactData, boolean creation) {
-        type("firstname", contactData.getFirstname());
-        type("lastname", contactData.getLastname());
-        type("address", contactData.getAddress());
-        type("mobile", contactData.getMobileNumber());
-        type("email", contactData.getEmail());
+    public void fillContactFormWithCheckGroup(ContactData contactData, boolean creation) {
+        fillContactForm(contactData);
         if (creation) {
             new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
         } else {
@@ -66,11 +62,18 @@ public class ContactHelper extends HelperBase {
         }
     }
 
-    public void createContact(ContactData contactData, boolean b) {
+    public void createContact(ContactData contactData) {
         gotoAddNewContact();
-        fillContactForm(contactData, b);
+        fillContactForm(contactData);
         submitContactCreation();
         gotoHomePage();
     }
 
+    public void fillContactForm(ContactData contactData) {
+        type("firstname", contactData.getFirstname());
+        type("lastname", contactData.getLastname());
+        type("address", contactData.getAddress());
+        type("mobile", contactData.getMobileNumber());
+        type("email", contactData.getEmail());
+    }
 }
