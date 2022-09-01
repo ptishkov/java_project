@@ -9,7 +9,7 @@ public class ContactDeletionTests extends TestBase {
     app.getNavigationHelper().gotoHome();
     if (! app.getContactHelper().isContactCreated()) {
       app.getContactHelper().createContact(new ContactData("Name", "LastName",
-              "Saint-Petersburg", "+79215553322", "ptishkov@baltbet.ru", "3333"));
+              "Saint-Petersburg", "+79215553322", "ptishkov@baltbet.ru"));
     }
     app.getContactHelper().tickFirstContact();
     app.getContactHelper().submitContactsDeletion();

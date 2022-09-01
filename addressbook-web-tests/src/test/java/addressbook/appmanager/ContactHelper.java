@@ -2,6 +2,7 @@ package addressbook.appmanager;
 
 import addressbook.model.ContactData;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
@@ -15,9 +16,9 @@ public class ContactHelper extends HelperBase {
     }
 
     public void fillContactFormWithCheckGroup(ContactData contactData, boolean creation) {
-        fillContactForm(contactData);
+        fillContactFormTextFields(contactData);
         if (creation) {
-            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+            selectionGroup();
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
@@ -64,16 +65,25 @@ public class ContactHelper extends HelperBase {
 
     public void createContact(ContactData contactData) {
         gotoAddNewContact();
-        fillContactForm(contactData);
+        fillContactFormTextFields(contactData);
+        selectionGroup();
         submitContactCreation();
         gotoHomePage();
     }
 
-    public void fillContactForm(ContactData contactData) {
+    public void fillContactFormTextFields(ContactData contactData) {
         type("firstname", contactData.getFirstname());
         type("lastname", contactData.getLastname());
         type("address", contactData.getAddress());
         type("mobile", contactData.getMobileNumber());
         type("email", contactData.getEmail());
+    }
+
+    public void selectionGroup() {
+        try {
+            new Select(wd.findElement(By.name("new_group"))).selectByIndex(1);
+        } catch(NoSuchElementException e) {
+            new Select(wd.findElement(By.name("new_group"))).selectByIndex(0);
+        }
     }
 }
