@@ -86,4 +86,8 @@ public class ContactHelper extends HelperBase {
             new Select(wd.findElement(By.name("new_group"))).selectByIndex(0);
         }
     }
+
+    public int getContactCount() {
+        return wd.findElements(By.name("entry")).size();
+    }
 }
