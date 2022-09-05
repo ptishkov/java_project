@@ -43,16 +43,16 @@ public class ContactHelper extends HelperBase {
         assertTrue(closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));
     }
 
-    public void initContactModification() {
-        click(By.cssSelector("img[alt=\"Edit\"]"));
+    public void initContactModification(int index) {
+        wd.findElements(By.cssSelector("img[alt=\"Edit\"]")).get(index).click();
     }
 
     public void submitContactModification() {
         click(By.name("update"));
     }
 
-    public void tickFirstContact() {
-        click(By.name("selected[]"));
+    public void tickFirstContact(int index) {
+        wd.findElements(By.name("selected[]")).get(index).click();
     }
 
     public boolean isContactCreated() {

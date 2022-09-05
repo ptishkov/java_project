@@ -14,7 +14,7 @@ public class ContactModificationTests extends TestBase {
             app.getContactHelper().createContact(new ContactData("Name", "LastName",
                     "Saint-Petersburg", "+79215553322", "ptishkov@baltbet.ru"));
         }
-        app.getContactHelper().initContactModification();
+        app.getContactHelper().initContactModification(before - 1);
         app.getContactHelper().fillContactFormWithCheckGroup(new ContactData("Name_new", "LastName_new",
                 "Moscow", "+79990001122", "tolokonnikov@yandex.ru"), false);
         app.getContactHelper().submitContactModification();

@@ -38,8 +38,8 @@ public class GroupHelper extends HelperBase {
         click(By.name("update"));
     }
 
-    public void tickFirstGroup() {
-        click(By.name("selected[]"));
+    public void tickFirstGroup(int index) {
+        wd.findElements(By.name("selected[]")).get(index).click();
     }
 
     public void createGroup(GroupData groupData) {
