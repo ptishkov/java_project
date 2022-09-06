@@ -1,11 +1,16 @@
 package addressbook.appmanager;
 
 import addressbook.model.ContactData;
+import addressbook.model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.testng.Assert.assertTrue;
 
@@ -85,6 +90,23 @@ public class ContactHelper extends HelperBase {
         } catch(NoSuchElementException e) {
             new Select(wd.findElement(By.name("new_group"))).selectByIndex(0);
         }
+    }
+
+    public List<ContactData> getContactList() {
+        List<ContactData> contacts = new ArrayList<ContactData>();
+        List<WebElement> elements = wd.findElements(By.name("entry"));
+        int tr = 2;
+        for (WebElement element : elements) {
+            String lastname = element.findElement(By.xpath("//table[@id='maintable']/tbody/tr[" + tr + "]/td[2]")).getText();
+            String firstname = element.findElement(By.xpath("//table[@id='maintable']/tbody/tr[" + tr + "]/td[3]")).getText();
+            String address = element.findElement(By.xpath("//table[@id='maintable']/tbody/tr[" + tr + "]/td[4]")).getText();
+            String mobilenumber = element.findElement(By.xpath("//table[@id='maintable']/tbody/tr[" + tr + "]/td[5]")).getText();
+            String email = element.findElement(By.xpath("//table[@id='maintable']/tbody/tr[" + tr + "]/td[6]")).getText();
+            ContactData contact = new ContactData(firstname, lastname, address, mobilenumber, email);
+            contacts.add(contact);
+            tr++;
+        }
+        return contacts;
     }
 
     public int getContactCount() {

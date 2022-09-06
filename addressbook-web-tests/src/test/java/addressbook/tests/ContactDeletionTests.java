@@ -4,21 +4,23 @@ import addressbook.model.ContactData;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
+import java.util.List;
+
 public class ContactDeletionTests extends TestBase {
   @Test
   public void testContactDeletion() {
     app.getNavigationHelper().gotoHome();
-    int before = app.getContactHelper().getContactCount();
     if (! app.getContactHelper().isContactCreated()) {
       app.getContactHelper().createContact(new ContactData("Name", "LastName",
               "Saint-Petersburg", "+79215553322", "ptishkov@baltbet.ru"));
     }
-    app.getContactHelper().tickFirstContact(before - 1);
+    List<ContactData> before = app.getContactHelper().getContactList();
+    app.getContactHelper().tickFirstContact(before.size() - 1);
     app.getContactHelper().submitContactsDeletion();
     app.getContactHelper().accessContactsDeletion();
     app.getNavigationHelper().gotoHome();
-    int after = app.getContactHelper().getContactCount();
-    Assert.assertEquals(after, before - 1);
+    List<ContactData> after = app.getContactHelper().getContactList();
+    Assert.assertEquals(after.size(), before.size() - 1);
   }
 
 }
