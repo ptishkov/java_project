@@ -4,8 +4,9 @@ import addressbook.model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class GroupHelper extends HelperBase {
 
@@ -44,7 +45,9 @@ public class GroupHelper extends HelperBase {
     public void tickFirstGroup(int index) {
         wd.findElements(By.name("selected[]")).get(index).click();
     }
-
+    public void tickFirstGroupById(int id) {
+        wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
+    }
     public void create(GroupData groupData) {
         initGroupCreation();
         fillGroupForm(new GroupData().withName("1234").withHeader("1234").withFooter("1234"));
@@ -52,16 +55,16 @@ public class GroupHelper extends HelperBase {
         returnToGroupPage();
     }
 
-    public void modify(int index, GroupData group) {
-        tickFirstGroup(index);
+    public void modify(GroupData group) {
+        tickFirstGroupById(group.getId());
         initGroupModification();
         fillGroupForm(group);
         submitGroupModification();
         returnToGroupPage();
     }
 
-    public void delete(int index) {
-        tickFirstGroup(index);
+    public void delete(GroupData group) {
+        tickFirstGroupById(group.getId());
         submitGroupsDeletion();
         returnToGroupPage();
     }
@@ -73,8 +76,8 @@ public class GroupHelper extends HelperBase {
         }
     }
 
-    public List<GroupData> list() {
-        List<GroupData> groups = new ArrayList<GroupData>();
+    public Set<GroupData> all() {
+        Set<GroupData> groups = new HashSet<GroupData>();
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
         for (WebElement element : elements) {
             String name = element.getText();
@@ -84,4 +87,5 @@ public class GroupHelper extends HelperBase {
         }
         return groups;
     }
+
 }
