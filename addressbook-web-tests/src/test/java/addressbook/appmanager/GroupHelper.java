@@ -42,9 +42,6 @@ public class GroupHelper extends HelperBase {
         click(By.name("update"));
     }
 
-    public void tickFirstGroup(int index) {
-        wd.findElements(By.name("selected[]")).get(index).click();
-    }
     public void tickFirstGroupById(int id) {
         wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
     }
