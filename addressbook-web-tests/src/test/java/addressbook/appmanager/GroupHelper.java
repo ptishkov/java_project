@@ -5,9 +5,7 @@ import addressbook.model.Groups;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class GroupHelper extends HelperBase {
 
@@ -50,6 +48,7 @@ public class GroupHelper extends HelperBase {
         initGroupCreation();
         fillGroupForm(new GroupData().withName("1234").withHeader("1234").withFooter("1234"));
         submitGroupCreation();
+        groupCashe = null;
         returnToGroupPage();
     }
 
@@ -58,12 +57,14 @@ public class GroupHelper extends HelperBase {
         initGroupModification();
         fillGroupForm(group);
         submitGroupModification();
+        groupCashe = null;
         returnToGroupPage();
     }
 
     public void delete(GroupData group) {
         tickFirstGroupById(group.getId());
         submitGroupsDeletion();
+        groupCashe = null;
         returnToGroupPage();
     }
     public boolean isGroupCreated() {
@@ -74,15 +75,20 @@ public class GroupHelper extends HelperBase {
         }
     }
 
+
+    private Groups groupCashe = null;
     public Groups all() {
-        Groups groups = new Groups();
+        if (groupCashe != null) {
+            return new Groups(groupCashe);
+        }
+        groupCashe = new Groups();
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
         for (WebElement element : elements) {
             String name = element.getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            groups.add(new GroupData().withId(id).withName(name));
+            groupCashe.add(new GroupData().withId(id).withName(name));
         }
-        return groups;
+        return new Groups(groupCashe);
     }
 
 }

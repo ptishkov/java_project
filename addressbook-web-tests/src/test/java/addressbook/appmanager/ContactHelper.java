@@ -5,9 +5,7 @@ import addressbook.model.Contacts;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static org.testng.Assert.assertTrue;
 
@@ -48,24 +46,18 @@ public class ContactHelper extends HelperBase {
         wd.findElement(By.cssSelector("input[value='" + id + "'")).click();
     }
 
-    public boolean isContactCreated() {
-        if (isElementPresent(By.name("selected[]"))) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public void create(ContactData contactData) {
         gotoAddNewContact();
         fillContactFormTextFields(contactData);
         submitContactCreation();
+        contactCashe = null;
         gotoHomePage();
     }
     public void modify(ContactData contact) {
         initContactModificationById(contact.getId());
         fillContactFormTextFields(contact);
         submitContactModification();
+        contactCashe = null;
         returntoHome();
     }
 
@@ -73,6 +65,7 @@ public class ContactHelper extends HelperBase {
         tickFirstContactById(contact.getId());
         submitContactsDeletion();
         accessContactsDeletion();
+        contactCashe = null;
         returntoHome();
     }
     private void returntoHome() {
@@ -86,8 +79,13 @@ public class ContactHelper extends HelperBase {
         type("mobile", contactData.getMobileNumber());
         type("email", contactData.getEmail());
     }
+
+    private Contacts contactCashe = null;
     public Contacts all() {
-        Contacts contacts = new Contacts();
+        if (contactCashe != null) {
+            return new Contacts(contactCashe);
+        }
+        contactCashe = new Contacts();
         List<WebElement> elements = wd.findElements(By.name("entry"));
         int tr = 2;
         for (WebElement element : elements) {
@@ -99,9 +97,9 @@ public class ContactHelper extends HelperBase {
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             ContactData contact = new ContactData().withId(id).withFirstname(firstname).withLastname(lastname)
                     .withAddress(address).withMobileNumber(mobilenumber).withEmail(email);
-            contacts.add(contact);
+            contactCashe.add(contact);
             tr++;
         }
-        return contacts;
+        return new Contacts(contactCashe);
     }
 }
