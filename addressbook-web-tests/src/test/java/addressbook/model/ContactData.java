@@ -3,33 +3,40 @@ package addressbook.model;
 import java.util.Objects;
 
 public class ContactData {
-    private int id;
-    private final String firstname;
-    private final String lastname;
-    private final String address;
-    private final String mobileNumber;
-    private final String email;
+    private int id = Integer.MAX_VALUE;
+    private String firstname;
+    private String lastname;
+    private String address;
+    private String mobileNumber;
+    private String email;
 
-    public ContactData(int id, String firstname, String lastname, String address, String mobileNumber, String email) {
-        this.id = id;
+    public ContactData withFirstname(String firstname) {
         this.firstname = firstname;
+        return this;
+    }
+    public ContactData withLastname(String lastname) {
         this.lastname = lastname;
-        this.address = address;
-        this.mobileNumber = mobileNumber;
-        this.email = email;
+        return this;
     }
 
-    public ContactData(String firstname, String lastname, String address, String mobileNumber, String email) {
-        this.id = Integer.MAX_VALUE;
-        this.firstname = firstname;
-        this.lastname = lastname;
+    public ContactData withAddress(String address) {
         this.address = address;
-        this.mobileNumber = mobileNumber;
-        this.email = email;
+        return this;
     }
 
-    public void setId(int id) {
+    public ContactData withMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
+        return this;
+    }
+
+    public ContactData withEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public ContactData withId(int id) {
         this.id = id;
+        return this;
     }
 
     public String getFirstname() {

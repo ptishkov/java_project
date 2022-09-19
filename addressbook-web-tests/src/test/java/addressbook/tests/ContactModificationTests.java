@@ -11,16 +11,16 @@ public class ContactModificationTests extends TestBase {
     public void ensurePreconditions() {
         app.goTo().home();
         if (app.contact().list().size() == 0) {
-            app.contact().create(new ContactData("Name", "LastName",
-                    "Saint-Petersburg", "+79215553322", "ptishkov@baltbet.ru"));
+            app.contact().create(new ContactData().withFirstname("Name").withLastname("LastName")
+                    .withAddress("Saint-Petersburg").withMobileNumber("+79215553322").withEmail("ptishkov@baltbet.ru"));
         }
     }
     @Test
     public void testContactModifications() {
         List<ContactData> before = app.contact().list();
         int index = before.size() - 1;
-        ContactData contact = new ContactData(before.get(index).getId(), "Name_new", "LastName_new",
-                "Moscow", "+79990001122", "tolokonnikov@yandex.ru");
+        ContactData contact = new ContactData().withId(before.get(index).getId()).withFirstname("Name_new").withLastname("LastName_new")
+                .withAddress("Moscow").withMobileNumber("+79990001122").withEmail("tolokonnikov@yandex.ru");
         app.contact().modify(index, contact);
         List<ContactData> after = app.contact().list();
         Assert.assertEquals(after.size(), before.size());
