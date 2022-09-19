@@ -5,7 +5,6 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class GroupDeletionTests extends TestBase {
   @Test
