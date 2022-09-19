@@ -7,7 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,6 +72,18 @@ public class ContactHelper extends HelperBase {
         selectionGroup();
         submitContactCreation();
         gotoHomePage();
+    }
+
+
+    public void modifyContact(int index, ContactData contact) {
+        initContactModification(index);
+        fillContactFormWithCheckGroup(contact, false);
+        submitContactModification();
+        returntoHome();
+    }
+
+    private void returntoHome() {
+        click(By.linkText("home"));
     }
 
     public void fillContactFormTextFields(ContactData contactData) {

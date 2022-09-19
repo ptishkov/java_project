@@ -7,13 +7,17 @@ import org.testng.annotations.*;
 import java.util.List;
 
 public class ContactDeletionTests extends TestBase {
-  @Test
-  public void testContactDeletion() {
+
+  @BeforeMethod
+  public void ensurePreconditions() {
     app.getNavigationHelper().gotoHome();
     if (! app.getContactHelper().isContactCreated()) {
       app.getContactHelper().createContact(new ContactData("Name", "LastName",
               "Saint-Petersburg", "+79215553322", "ptishkov@baltbet.ru"));
     }
+  }
+  @Test
+  public void testContactDeletion() {
     List<ContactData> before = app.getContactHelper().getContactList();
     app.getContactHelper().tickFirstContact(before.size() - 1);
     app.getContactHelper().submitContactsDeletion();

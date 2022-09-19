@@ -4,7 +4,6 @@ import addressbook.model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,6 +52,13 @@ public class GroupHelper extends HelperBase {
         returnToGroupPage();
     }
 
+    public void modifyGroup(int index, GroupData group) {
+        tickFirstGroup(index);
+        initGroupModification();
+        fillGroupForm(group);
+        submitGroupModification();
+        returnToGroupPage();
+    }
     public boolean isGroupCreated() {
         if (isElementPresent(By.name("selected[]"))) {
             return true;
