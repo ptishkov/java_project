@@ -2,7 +2,6 @@ package addressbook.tests;
 
 import addressbook.model.GroupData;
 import addressbook.model.Groups;
-import org.testng.Assert;
 import org.testng.annotations.*;
 
 import static org.hamcrest.CoreMatchers.equalTo;
