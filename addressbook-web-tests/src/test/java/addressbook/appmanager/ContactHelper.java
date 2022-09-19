@@ -2,11 +2,8 @@ package addressbook.appmanager;
 
 import addressbook.model.ContactData;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
-import org.testng.Assert;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,22 +15,13 @@ public class ContactHelper extends HelperBase {
         super(wd);
     }
 
-    public void fillContactFormWithCheckGroup(ContactData contactData, boolean creation) {
-        fillContactFormTextFields(contactData);
-        if (creation) {
-            selectionGroup();
-        } else {
-            Assert.assertFalse(isElementPresent(By.name("new_group")));
-        }
+    public void gotoHomePage() {
+        click(By.linkText("home page"));
     }
-
     public void gotoAddNewContact() {
         click(By.linkText("add new"));
     }
 
-    public void gotoHomePage() {
-        click(By.linkText("home page"));
-    }
     public void submitContactCreation() {
         click(By.xpath("//input[21]"));
     }
@@ -66,22 +54,26 @@ public class ContactHelper extends HelperBase {
         }
     }
 
-    public void createContact(ContactData contactData) {
+    public void create(ContactData contactData) {
         gotoAddNewContact();
         fillContactFormTextFields(contactData);
-        selectionGroup();
         submitContactCreation();
         gotoHomePage();
     }
 
-
-    public void modifyContact(int index, ContactData contact) {
+    public void modify(int index, ContactData contact) {
         initContactModification(index);
-        fillContactFormWithCheckGroup(contact, false);
+        fillContactFormTextFields(contact);
         submitContactModification();
         returntoHome();
     }
 
+    public void delete(int index) {
+        tickFirstContact(index);
+        submitContactsDeletion();
+        accessContactsDeletion();
+        returntoHome();
+    }
     private void returntoHome() {
         click(By.linkText("home"));
     }
@@ -94,15 +86,7 @@ public class ContactHelper extends HelperBase {
         type("email", contactData.getEmail());
     }
 
-    public void selectionGroup() {
-        try {
-            new Select(wd.findElement(By.name("new_group"))).selectByIndex(1);
-        } catch(NoSuchElementException e) {
-            new Select(wd.findElement(By.name("new_group"))).selectByIndex(0);
-        }
-    }
-
-    public List<ContactData> getContactList() {
+    public List<ContactData> list() {
         List<ContactData> contacts = new ArrayList<ContactData>();
         List<WebElement> elements = wd.findElements(By.name("entry"));
         int tr = 2;
