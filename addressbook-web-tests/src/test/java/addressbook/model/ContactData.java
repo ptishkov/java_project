@@ -19,6 +19,26 @@ public class ContactData {
         this.email = email;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ContactData that = (ContactData) o;
+
+        if (!Objects.equals(firstname, that.firstname)) return false;
+        if (!Objects.equals(lastname, that.lastname)) return false;
+        return Objects.equals(address, that.address);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = firstname != null ? firstname.hashCode() : 0;
+        result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        return result;
+    }
+
     public ContactData(String firstname, String lastname, String address, String mobileNumber, String email) {
         this.id = Integer.MAX_VALUE;
         this.firstname = firstname;
@@ -64,30 +84,6 @@ public class ContactData {
                 ", mobileNumber='" + mobileNumber + '\'' +
                 ", email='" + email + '\'' +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        ContactData that = (ContactData) o;
-
-        if (!Objects.equals(firstname, that.firstname)) return false;
-        if (!Objects.equals(lastname, that.lastname)) return false;
-        if (!Objects.equals(address, that.address)) return false;
-        if (!Objects.equals(mobileNumber, that.mobileNumber)) return false;
-        return Objects.equals(email, that.email);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = firstname != null ? firstname.hashCode() : 0;
-        result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
-        result = 31 * result + (address != null ? address.hashCode() : 0);
-        result = 31 * result + (mobileNumber != null ? mobileNumber.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        return result;
     }
 
 }

@@ -11,6 +11,7 @@ import org.testng.Assert;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class ContactHelper extends HelperBase {
@@ -100,6 +101,15 @@ public class ContactHelper extends HelperBase {
             String firstname = element.findElement(By.xpath("//table[@id='maintable']/tbody/tr[" + tr + "]/td[3]")).getText();
             String address = element.findElement(By.xpath("//table[@id='maintable']/tbody/tr[" + tr + "]/td[4]")).getText();
             String email = element.findElement(By.xpath("//table[@id='maintable']/tbody/tr[" + tr + "]/td[5]")).getText();
+/*          реализация разделения области емеил на 3 разных поля
+            if (email.contains("\n")) {
+                String email1 = email.substring(email.indexOf("\n") + 1);
+                email = email.substring(0, email.indexOf("\n"));
+                if (email1.contains("\n")) {
+                    String email2 = email.substring(email.indexOf("\n") + 1);
+                    email1 = email.substring(0, email.indexOf("\n") + 1);
+                }
+            }*/
             String mobilenumber = element.findElement(By.xpath("//table[@id='maintable']/tbody/tr[" + tr + "]/td[6]")).getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             ContactData contact = new ContactData(id, firstname, lastname, address, mobilenumber, email);
