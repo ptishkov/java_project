@@ -74,8 +74,6 @@ public class GroupHelper extends HelperBase {
             return false;
         }
     }
-
-
     private Groups groupCashe = null;
     public Groups all() {
         if (groupCashe != null) {
@@ -89,6 +87,9 @@ public class GroupHelper extends HelperBase {
             groupCashe.add(new GroupData().withId(id).withName(name));
         }
         return new Groups(groupCashe);
+    }
+    public int count() {
+        return wd.findElements(By.name("selected[]")).size();
     }
 
 }

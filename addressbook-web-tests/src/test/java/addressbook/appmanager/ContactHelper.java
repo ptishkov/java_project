@@ -102,4 +102,7 @@ public class ContactHelper extends HelperBase {
         }
         return new Contacts(contactCashe);
     }
+    public int count() {
+        return wd.findElements(By.name("selected[]")).size();
+    }
 }
