@@ -8,6 +8,7 @@ dependencies {
     compile 'org.testng:testng:7.3.0'
     compile 'org.seleniumhq.selenium:selenium-java:4.4.0'
     implementation "org.slf4j:slf4j-simple:1.6.1"
+    testImplementation 'org.hamcrest:hamcrest:2.2'
 }
 
 test {

@@ -1,30 +1,25 @@
 package addressbook.tests;
 
 import addressbook.model.ContactData;
-import org.testng.Assert;
+import addressbook.model.Contacts;
 import org.testng.annotations.*;
-import java.util.Comparator;
-import java.util.List;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertEquals;
 
 public class ContactCreationTests extends TestBase {
   @Test
   public void testContactCreation() {
-    app.getNavigationHelper().gotoHome();
-    List<ContactData> before = app.getContactHelper().getContactList();
-    app.getContactHelper().gotoAddNewContact();
-    ContactData contact = new ContactData("Name", "LastName",
-            "Saint-Petersburg", "+79215553322", "ptishkov@baltbet.ru");
-    app.getContactHelper().fillContactFormWithCheckGroup(contact, true);
-    app.getContactHelper().submitContactCreation();
-    app.getContactHelper().gotoHomePage();
-    List<ContactData> after = app.getContactHelper().getContactList();
-    Assert.assertEquals(after.size(), before.size() + 1);
-
-    before.add(contact);
-    Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
-    before.sort(byId);
-    after.sort(byId);
-    Assert.assertEquals(before, after);
+    app.goTo().home();
+    Contacts before = app.contact().all();
+    ContactData contact = new ContactData().withFirstname("Name").withLastname("LastName")
+            .withAddress("Saint-Petersburg").withHomePhone("+79215553322").withEmail("ptishkov@baltbet.ru");
+    app.contact().create(contact);
+    assertThat(app.contact().count(), equalTo(before.size() + 1));
+    Contacts after = app.contact().all();
+    assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
   }
+
 
 }
