@@ -78,6 +78,7 @@ public class ContactHelper extends HelperBase {
         type("address", contactData.getAddress());
         type("mobile", contactData.getHome());
         type("email", contactData.getEmail());
+        attach("photo", contactData.getPhoto());
     }
 
     private Contacts contactCashe = null;
