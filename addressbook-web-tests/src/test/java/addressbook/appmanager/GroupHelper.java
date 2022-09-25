@@ -44,9 +44,9 @@ public class GroupHelper extends HelperBase {
     public void tickFirstGroupById(int id) {
         wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
     }
-    public void create(GroupData groupData) {
+    public void create(GroupData group) {
         initGroupCreation();
-        fillGroupForm(new GroupData().withName("1234").withHeader("1234").withFooter("1234"));
+        fillGroupForm(group);
         submitGroupCreation();
         groupCashe = null;
         returnToGroupPage();
@@ -68,11 +68,7 @@ public class GroupHelper extends HelperBase {
         returnToGroupPage();
     }
     public boolean isGroupCreated() {
-        if (isElementPresent(By.name("selected[]"))) {
-            return true;
-        } else {
-            return false;
-        }
+        return isElementPresent(By.name("selected[]"));
     }
     private Groups groupCashe = null;
     public Groups all() {
