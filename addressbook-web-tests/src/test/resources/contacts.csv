@@ -1,20 +1,5 @@
-firstname 0;lastname 0;address 0
-firstname 1;lastname 1;address 1
-firstname 2;lastname 2;address 2
-firstname 3;lastname 3;address 3
-firstname 4;lastname 4;address 4
-firstname 5;lastname 5;address 5
-firstname 6;lastname 6;address 6
-firstname 7;lastname 7;address 7
-firstname 8;lastname 8;address 8
-firstname 9;lastname 9;address 9
-firstname 10;lastname 10;address 10
-firstname 11;lastname 11;address 11
-firstname 12;lastname 12;address 12
-firstname 13;lastname 13;address 13
-firstname 14;lastname 14;address 14
-firstname 15;lastname 15;address 15
-firstname 16;lastname 16;address 16
-firstname 17;lastname 17;address 17
-firstname 18;lastname 18;address 18
-firstname 19;lastname 19;address 19
+firstname 0;lastname 0;address 0;111 0;2222 0;33333 0;email@mail.ru 0;email2@mail.ru 0;email3@mail.ru 0;src\test\resources\unknown.png
+firstname 1;lastname 1;address 1;111 1;2222 1;33333 1;email@mail.ru 1;email2@mail.ru 1;email3@mail.ru 1;src\test\resources\unknown.png
+firstname 2;lastname 2;address 2;111 2;2222 2;33333 2;email@mail.ru 2;email2@mail.ru 2;email3@mail.ru 2;src\test\resources\unknown.png
+firstname 3;lastname 3;address 3;111 3;2222 3;33333 3;email@mail.ru 3;email2@mail.ru 3;email3@mail.ru 3;src\test\resources\unknown.png
+firstname 4;lastname 4;address 4;111 4;2222 4;33333 4;email@mail.ru 4;email2@mail.ru 4;email3@mail.ru 4;src\test\resources\unknown.png

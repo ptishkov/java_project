@@ -39,21 +39,22 @@ public class ContactDataGenerator {
     private static void save(List<ContactData> contacts, File file) throws IOException {
         Writer writer = new FileWriter(file);
         for (ContactData contact : contacts) {
-            writer.write(String.format("%s;%s;%s\n", contact.getFirstname(), contact.getLastname(), contact.getAddress(),
+            writer.write(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s\n", contact.getFirstname(), contact.getLastname(), contact.getAddress(),
                     contact.getHome(), contact.getMobile(), contact.getWork(),
-                    contact.getEmail(), contact.getEmail2(), contact.getEmail3()));
+                    contact.getEmail(), contact.getEmail2(), contact.getEmail3(), contact.getPhoto()));
         }
         writer.close();
     }
 
     private static List<ContactData> generateContacts(int count) {
         List<ContactData> contacts = new ArrayList<ContactData>();
+        File photo = new File("src/test/resources/unknown.png");
         for (int i = 0; i < count; i++) {
             contacts.add(new ContactData().withFirstname(String.format("firstname %s", i))
                     .withLastname(String.format("lastname %s", i)).withAddress(String.format("address %s", i))
                     .withHomePhone(String.format("111 %s", i)).withMobilePhone(String.format("2222 %s", i)).withWorkPhone(String.format("33333 %s", i))
                     .withEmail(String.format("email@mail.ru %s", i)).withEmail2(String.format("email2@mail.ru %s", i))
-                    .withEmail3(String.format("email3@mail.ru %s", i)));
+                    .withEmail3(String.format("email3@mail.ru %s", i)).withPhoto(photo));
         }
         return contacts;
     }
