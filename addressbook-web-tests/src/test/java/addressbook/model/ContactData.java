@@ -1,7 +1,10 @@
 package addressbook.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.inject.Exposed;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.checkerframework.checker.signature.qual.CanonicalNameAndBinaryName;
 
 import java.io.File;
 import java.util.Objects;
@@ -21,6 +24,7 @@ public class ContactData {
     private String email3;
     private String allEmails;
     private File photo;
+
     public ContactData withFirstname(String firstname) {
         this.firstname = firstname;
         return this;
