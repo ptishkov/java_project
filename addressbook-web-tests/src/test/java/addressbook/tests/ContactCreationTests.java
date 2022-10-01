@@ -2,10 +2,9 @@ package addressbook.tests;
 
 import addressbook.model.ContactData;
 import addressbook.model.Contacts;
-import addressbook.model.GroupData;
 import org.testng.annotations.*;
 
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -15,21 +14,17 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactCreationTests extends TestBase {
   @DataProvider
-  public Iterator<Object[]> validContacts() {
+  public Iterator<Object[]> validContacts() throws IOException {
     List<Object[]> list = new ArrayList<Object[]>();
-    File photo = new File("src/test/resources/unknown.png");
-    list.add(new Object[] {new ContactData().withFirstname("firstname 1").withLastname("lastname 1").withAddress("sity 1")
-            .withHomePhone("+111").withMobilePhone("+222").withWorkPhone("+333")
-            .withEmail("email_1@mail.ru").withEmail2("email2_1@mail.ru").withEmail3("email3_1@mail.ru")
-            .withPhoto(photo)});
-    list.add(new Object[] {new ContactData().withFirstname("firstname 2").withLastname("lastname 2").withAddress("sity 2")
-            .withHomePhone("++111").withMobilePhone("++222").withWorkPhone("++333")
-            .withEmail("email_2@mail.ru").withEmail2("email2_2@mail.ru").withEmail3("email3_2@mail.ru")
-            .withPhoto(photo)});
-    list.add(new Object[] {new ContactData().withFirstname("firstname 3").withLastname("lastname 3").withAddress("sity 3")
-            .withHomePhone("+++111").withMobilePhone("+++222").withWorkPhone("+++333")
-            .withEmail("email_3@mail.ru").withEmail2("email2_3@mail.ru").withEmail3("email3_3@mail.ru")
-            .withPhoto(photo)});
+    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.csv")));
+    String line = reader.readLine();
+    while (line != null) {
+      String[] split = line.split(";");
+      list.add(new Object[]{new ContactData().withFirstname(split[0]).withLastname(split[1]).withAddress(split[2])
+              .withHomePhone(split[3]).withMobilePhone(split[4]).withWorkPhone(split[5])
+              .withEmail(split[6]).withEmail2(split[7]).withEmail3(split[8]).withPhoto(new File(split[9]))});
+      line = reader.readLine();
+    }
     return list.iterator();
   }
   @Test(dataProvider = "validContacts")
