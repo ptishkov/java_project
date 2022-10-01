@@ -1,0 +1,62 @@
+<list>
+  <contact>
+    <firstname>firstname 0</firstname>
+    <lastname>lastname 0</lastname>
+    <address>address 0</address>
+    <home>111 0</home>
+    <mobile>2222 0</mobile>
+    <work>33333 0</work>
+    <email>email@mail.ru 0</email>
+    <email2>email2@mail.ru 0</email2>
+    <email3>email3@mail.ru 0</email3>
+    <photo>src\test\resources\unknown.png</photo>
+  </contact>
+  <contact>
+    <firstname>firstname 1</firstname>
+    <lastname>lastname 1</lastname>
+    <address>address 1</address>
+    <home>111 1</home>
+    <mobile>2222 1</mobile>
+    <work>33333 1</work>
+    <email>email@mail.ru 1</email>
+    <email2>email2@mail.ru 1</email2>
+    <email3>email3@mail.ru 1</email3>
+    <photo>src\test\resources\unknown.png</photo>
+  </contact>
+  <contact>
+    <firstname>firstname 2</firstname>
+    <lastname>lastname 2</lastname>
+    <address>address 2</address>
+    <home>111 2</home>
+    <mobile>2222 2</mobile>
+    <work>33333 2</work>
+    <email>email@mail.ru 2</email>
+    <email2>email2@mail.ru 2</email2>
+    <email3>email3@mail.ru 2</email3>
+    <photo>src\test\resources\unknown.png</photo>
+  </contact>
+  <contact>
+    <firstname>firstname 3</firstname>
+    <lastname>lastname 3</lastname>
+    <address>address 3</address>
+    <home>111 3</home>
+    <mobile>2222 3</mobile>
+    <work>33333 3</work>
+    <email>email@mail.ru 3</email>
+    <email2>email2@mail.ru 3</email2>
+    <email3>email3@mail.ru 3</email3>
+    <photo>src\test\resources\unknown.png</photo>
+  </contact>
+  <contact>
+    <firstname>firstname 4</firstname>
+    <lastname>lastname 4</lastname>
+    <address>address 4</address>
+    <home>111 4</home>
+    <mobile>2222 4</mobile>
+    <work>33333 4</work>
+    <email>email@mail.ru 4</email>
+    <email2>email2@mail.ru 4</email2>
+    <email3>email3@mail.ru 4</email3>
+    <photo>src\test\resources\unknown.png</photo>
+  </contact>
+</list>
