@@ -49,7 +49,7 @@ public class GroupCreationTests extends TestBase {
   }
   @Test(dataProvider = "validGroupsFromJson")
   public void testGroupCreation(GroupData group){
-    app.goTo().GroupPage();
+    app.goTo().groupPage();
     Groups before = app.group().all();
     app.group().create(group);
     assertThat(app.group().count(), equalTo(before.size() + 1));
