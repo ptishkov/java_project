@@ -1,10 +1,7 @@
 package addressbook.model;
 
-import com.google.gson.annotations.Expose;
-import com.google.inject.Exposed;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
-import org.checkerframework.checker.signature.qual.CanonicalNameAndBinaryName;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -47,11 +44,10 @@ public class ContactData {
     private String email3;
     @Transient
     private String allEmails;
-    @Column(name = "photo")
+    //@Column(name = "photo")
     @Type(type = "text")
+    @com.google.gson.annotations.SerializedName("path")
     private String photo;
-    //@Transient
-    //private String group;
 
     public ContactData withFirstname(String firstname) {
         this.firstname = firstname;

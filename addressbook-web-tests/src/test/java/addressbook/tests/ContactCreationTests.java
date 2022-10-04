@@ -2,7 +2,6 @@ package addressbook.tests;
 
 import addressbook.model.ContactData;
 import addressbook.model.Contacts;
-import addressbook.model.GroupData;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.thoughtworks.xstream.XStream;
@@ -50,10 +49,10 @@ public class ContactCreationTests extends TestBase {
   @Test(dataProvider = "validContactsFromJson")
   public void testContactCreation(ContactData contact) {
     app.goTo().home();
-    Contacts before = app.contact().all();
+    Contacts before = app.db().contacts();
     app.contact().create(contact);
     assertThat(app.contact().count(), equalTo(before.size() + 1));
-    Contacts after = app.contact().all();
+    Contacts after = app.db().contacts();
     assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
   }
 }
