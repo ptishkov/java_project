@@ -10,9 +10,7 @@
     "email": "email@mail.ru 0",
     "email2": "email2@mail.ru 0",
     "email3": "email3@mail.ru 0",
-    "photo": {
-      "path": "src\\test\\resources\\unknown.png"
-    }
+    "path": "src\\test\\resources\\unknown.png"
   },
   {
     "id": 2147483647,
@@ -25,9 +23,7 @@
     "email": "email@mail.ru 1",
     "email2": "email2@mail.ru 1",
     "email3": "email3@mail.ru 1",
-    "photo": {
-      "path": "src\\test\\resources\\unknown.png"
-    }
+    "path": "src\\test\\resources\\unknown.png"
   },
   {
     "id": 2147483647,
@@ -40,38 +36,6 @@
     "email": "email@mail.ru 2",
     "email2": "email2@mail.ru 2",
     "email3": "email3@mail.ru 2",
-    "photo": {
-      "path": "src\\test\\resources\\unknown.png"
-    }
-  },
-  {
-    "id": 2147483647,
-    "firstname": "firstname 3",
-    "lastname": "lastname 3",
-    "address": "address 3",
-    "home": "111 3",
-    "mobile": "2222 3",
-    "work": "33333 3",
-    "email": "email@mail.ru 3",
-    "email2": "email2@mail.ru 3",
-    "email3": "email3@mail.ru 3",
-    "photo": {
-      "path": "src\\test\\resources\\unknown.png"
-    }
-  },
-  {
-    "id": 2147483647,
-    "firstname": "firstname 4",
-    "lastname": "lastname 4",
-    "address": "address 4",
-    "home": "111 4",
-    "mobile": "2222 4",
-    "work": "33333 4",
-    "email": "email@mail.ru 4",
-    "email2": "email2@mail.ru 4",
-    "email3": "email3@mail.ru 4",
-    "photo": {
-      "path": "src\\test\\resources\\unknown.png"
-    }
+    "path": "src\\test\\resources\\unknown.png"
   }
 ]
