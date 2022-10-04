@@ -76,8 +76,12 @@ public class ContactHelper extends HelperBase {
         type("firstname", contactData.getFirstname());
         type("lastname", contactData.getLastname());
         type("address", contactData.getAddress());
-        type("mobile", contactData.getHome());
+        type("home", contactData.getHome());
+        type("mobile", contactData.getMobile());
+        type("work", contactData.getWork());
         type("email", contactData.getEmail());
+        type("email2", contactData.getEmail2());
+        type("email3", contactData.getEmail3());
         attach("photo", contactData.getPhoto());
     }
 
