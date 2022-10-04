@@ -44,9 +44,8 @@ public class ContactData {
     private String email3;
     @Transient
     private String allEmails;
-    //@Column(name = "photo")
+    @Column(name = "photo")
     @Type(type = "text")
-    @com.google.gson.annotations.SerializedName("path")
     private String photo;
 
     public ContactData withFirstname(String firstname) {

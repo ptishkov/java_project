@@ -10,7 +10,7 @@
     "email": "email@mail.ru 0",
     "email2": "email2@mail.ru 0",
     "email3": "email3@mail.ru 0",
-    "path": "src\\test\\resources\\unknown.png"
+    "photo": "src\\test\\resources\\unknown.png"
   },
   {
     "id": 2147483647,
@@ -23,7 +23,7 @@
     "email": "email@mail.ru 1",
     "email2": "email2@mail.ru 1",
     "email3": "email3@mail.ru 1",
-    "path": "src\\test\\resources\\unknown.png"
+    "photo": "src\\test\\resources\\unknown.png"
   },
   {
     "id": 2147483647,
@@ -36,6 +36,6 @@
     "email": "email@mail.ru 2",
     "email2": "email2@mail.ru 2",
     "email3": "email3@mail.ru 2",
-    "path": "src\\test\\resources\\unknown.png"
+    "photo": "src\\test\\resources\\unknown.png"
   }
 ]
