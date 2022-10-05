@@ -5,6 +5,9 @@ import addressbook.model.Contacts;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
+
 import java.util.List;
 
 import static org.testng.Assert.assertTrue;
@@ -83,6 +86,13 @@ public class ContactHelper extends HelperBase {
         type("email2", contactData.getEmail2());
         type("email3", contactData.getEmail3());
         attach("photo", contactData.getPhoto());
+        /*if (contactData.getGroups().size() > 0) {
+            Assert.assertTrue(contactData.getGroups().size() == 1);
+            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
+        } else {
+            Assert.assertFalse(isElementPresent(By.name("new_group")));
+        }*/
+
     }
 
     private Contacts contactCashe = null;
