@@ -29,9 +29,11 @@ public class ContactModificationTests extends TestBase {
                 .withHomePhone("+79990001122").withMobilePhone("+79993332211").withWorkPhone("+3215555")
                 .withEmail("tolokonnikov@yandex.ru").withEmail2("balalaika@rambler.ru").withEmail3("damedvedev@yahoo.com")
                 .withPhoto(new File("src\\test\\resources\\25-24.jpg"));
+        app.goTo().home();
         app.contact().modify(contact);
         assertThat(app.contact().count(), equalTo(before.size()));
         Contacts after = app.db().contacts();
         assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
+        verifyContactListInUI();
     }
 }
