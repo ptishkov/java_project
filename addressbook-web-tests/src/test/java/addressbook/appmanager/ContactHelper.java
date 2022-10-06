@@ -6,7 +6,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
-import org.testng.Assert;
 
 import java.util.List;
 
@@ -45,8 +44,14 @@ public class ContactHelper extends HelperBase {
         click(By.name("update"));
     }
 
-    public void tickFirstContactById(int id) {
+    public void tickContactById(int id) {
         wd.findElement(By.cssSelector("input[value='" + id + "'")).click();
+    }
+
+    public void tickDropdownGroup (int id) {
+        wd.findElement(By.name("to_group")).click();
+        //wd.findElement(By.cssSelector("option[value='" + id + "'")).click();
+        new Select(wd.findElement(By.name("to_group"))).selectByValue("" + id);
     }
 
     public void create(ContactData contactData) {
@@ -65,12 +70,30 @@ public class ContactHelper extends HelperBase {
     }
 
     public void delete(ContactData contact) {
-        tickFirstContactById(contact.getId());
+        tickContactById(contact.getId());
         submitContactsDeletion();
         accessContactsDeletion();
         contactCashe = null;
         returntoHome();
     }
+    public void addToGroup(ContactData contact, int groupId) {
+        tickContactById(contact.getId());
+        tickDropdownGroup(groupId);
+        clickAddTo();
+        contactCashe = null;
+        returntoHome();
+    }
+    public void addToGroup(ContactData contact) {
+        tickContactById(contact.getId());
+        clickAddTo();
+        contactCashe = null;
+        returntoHome();
+    }
+
+    private void clickAddTo() {
+        wd.findElement(By.cssSelector("input[value='Add to'")).click();
+    }
+
     private void returntoHome() {
         click(By.linkText("home"));
     }
@@ -138,4 +161,5 @@ public class ContactHelper extends HelperBase {
                 .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work)
                 .withEmail(email).withEmail2(email2).withEmail3(email3);
     }
+
 }

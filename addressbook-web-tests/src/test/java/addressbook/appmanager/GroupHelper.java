@@ -67,6 +67,19 @@ public class GroupHelper extends HelperBase {
         groupCashe = null;
         returnToGroupPage();
     }
+    public void findFreeId(Groups groupsOfContact, Groups groupsFromDb, int freeGroup) {
+        for (GroupData group : groupsOfContact) {
+            for (GroupData b : groupsFromDb) {
+                if (b.getId() != group.getId()) {
+                    freeGroup = b.getId();
+                    break;
+                }
+            }
+            if (freeGroup != 0) {
+                break;
+            }
+        }
+    }
     public boolean isGroupCreated() {
         return isElementPresent(By.name("selected[]"));
     }
