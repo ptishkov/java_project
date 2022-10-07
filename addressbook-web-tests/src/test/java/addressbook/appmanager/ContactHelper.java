@@ -2,6 +2,7 @@ package addressbook.appmanager;
 
 import addressbook.model.ContactData;
 import addressbook.model.Contacts;
+import addressbook.model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -48,11 +49,19 @@ public class ContactHelper extends HelperBase {
         wd.findElement(By.cssSelector("input[value='" + id + "'")).click();
     }
 
-    public void tickDropdownGroup (int id) {
+    public void tickToGroup(int id) {
         wd.findElement(By.name("to_group")).click();
-        //wd.findElement(By.cssSelector("option[value='" + id + "'")).click();
         new Select(wd.findElement(By.name("to_group"))).selectByValue("" + id);
     }
+    public void tickGroup(int id) {
+        wd.findElement(By.name("group")).click();
+        new Select(wd.findElement(By.name("group"))).selectByValue("" + id);
+    }
+    public void tickAllGroups() {
+        wd.findElement(By.name("group")).click();
+        new Select(wd.findElement(By.name("group"))).selectByVisibleText("[all]");
+    }
+
 
     public void create(ContactData contactData) {
         gotoAddNewContact();
@@ -78,7 +87,7 @@ public class ContactHelper extends HelperBase {
     }
     public void addToGroup(ContactData contact, int groupId) {
         tickContactById(contact.getId());
-        tickDropdownGroup(groupId);
+        tickToGroup(groupId);
         clickAddTo();
         contactCashe = null;
         returntoHome();
@@ -89,9 +98,19 @@ public class ContactHelper extends HelperBase {
         contactCashe = null;
         returntoHome();
     }
+    public void removeFromGroup(ContactData contact, int idGroup) {
+        tickGroup(idGroup);
+        tickContactById(contact.getId());
+        clickRemove();
+        returntoHome();
+        tickAllGroups();
+    }
+    private void clickRemove() {
+        wd.findElement(By.cssSelector("input[name=\"remove\"]")).click();
+    }
 
     private void clickAddTo() {
-        wd.findElement(By.cssSelector("input[value='Add to'")).click();
+        wd.findElement(By.cssSelector("input[name=\"add\"]")).click();
     }
 
     private void returntoHome() {
