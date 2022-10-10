@@ -9,10 +9,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
     private final Properties properties;
-    public WebDriver wd;
+    WebDriver wd;
     private final String browser;
 
     public ApplicationManager(String browser){
@@ -29,6 +30,7 @@ public class ApplicationManager {
         } else if (browser.equals(BrowserType.FIREFOX)) {
             wd = new FirefoxDriver();
         }
+        wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         wd.get(properties.getProperty("web.baseUrl"));
     }
 
@@ -36,4 +38,11 @@ public class ApplicationManager {
         wd.quit();
     }
 
+    public HttpSession newSession() {
+        return new HttpSession(this);
+    }
+
+    public String getProperty(String key) {
+        return properties.getProperty(key);
+    }
 }
