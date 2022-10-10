@@ -61,14 +61,14 @@ public class AddContactToGroupTests extends TestBase {
                     before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
             idOfFreeGroup = app.db().groups().stream().mapToInt((g) -> g.getId()).max().getAsInt();
         } else {
-            app.group().findFreeId(groupsOfContact, groups, idOfFreeGroup);
+            idOfFreeGroup = app.group().findFreeId(groupsOfContact, groups, idOfFreeGroup);
         }
         app.goTo().home();
         app.contact().addToGroup(contact, idOfFreeGroup);
         ContactData contactAfterAddToGroup = app.db().contacts().iterator().next();
         assertThat(contactAfterAddToGroup.getGroups().size(), equalTo(groupsOfContact.size() + 1));
-        //реализовать проверку увеличения групп внутри контакта
-        //assertThat(contactAfterAddToGroup.getGroups(), equalTo(groupsOfContact.как-то добавить новую группу)));
+        GroupData addedGroup = app.group().findGroup(app.db().groups(), idOfFreeGroup);
+        assertThat(contactAfterAddToGroup.getGroups(), equalTo(groupsOfContact.withAdded(addedGroup)));
         verifyContactListInUI();
         app.goTo().groupPage();
         verifyGroupListInUI();

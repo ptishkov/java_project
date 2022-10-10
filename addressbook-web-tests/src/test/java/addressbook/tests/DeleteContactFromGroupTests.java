@@ -56,8 +56,8 @@ public class DeleteContactFromGroupTests extends TestBase{
         app.contact().removeFromGroup(contact, idGroup);
         ContactData contactAfterAddToGroup = app.db().contacts().iterator().next();
         assertThat(contactAfterAddToGroup.getGroups().size(), equalTo(groupsOfContact.size() - 1));
-        //реализовать проверку уменьшения групп внутри контакта
-        //assertThat(contactAfterAddToGroup.getGroups(), equalTo(groupsOfContact.как-то удалить группу)));
+        GroupData addedGroup = app.group().findGroup(app.db().groups(), idGroup);
+        assertThat(contactAfterAddToGroup.getGroups(), equalTo(groupsOfContact.without(addedGroup)));
         verifyContactListInUI();
         app.goTo().groupPage();
         verifyGroupListInUI();
