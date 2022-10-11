@@ -67,21 +67,15 @@ public class GroupHelper extends HelperBase {
         groupCashe = null;
         returnToGroupPage();
     }
-    public int findFreeId(Groups groupsOfContact, Groups groupsFromDb, int freeGroup) {
-        for (GroupData group : groupsOfContact) {
-            for (GroupData b : groupsFromDb) {
-                if (b.getId() != group.getId()) {
-                    freeGroup = b.getId();
-                    break;
-                }
-            }
-            if (freeGroup != 0) {
-                break;
+    public int findFreeId(Groups groupsOfContact, Groups groupsFromDb) {
+        int freeGroup = 0;
+        for (GroupData group : groupsFromDb) {
+            if (!groupsOfContact.contains(group)) {
+                freeGroup = group.getId();
             }
         }
         return freeGroup;
     }
-
     public GroupData findGroup(Groups groups, int idGroup) {
         GroupData selectedGroup = new GroupData();
         for (GroupData group : groups) {

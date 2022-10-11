@@ -61,7 +61,7 @@ public class AddContactToGroupTests extends TestBase {
                     before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
             idOfFreeGroup = app.db().groups().stream().mapToInt((g) -> g.getId()).max().getAsInt();
         } else {
-            idOfFreeGroup = app.group().findFreeId(groupsOfContact, groups, idOfFreeGroup);
+            idOfFreeGroup = app.group().findFreeId(groupsOfContact, groups);
         }
         app.goTo().home();
         app.contact().addToGroup(contact, idOfFreeGroup);
