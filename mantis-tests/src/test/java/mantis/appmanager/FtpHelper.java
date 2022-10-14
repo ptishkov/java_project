@@ -5,6 +5,7 @@ import org.apache.commons.net.ftp.FTPClient;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 
 public class FtpHelper {
 
@@ -21,7 +22,7 @@ public class FtpHelper {
         ftp.login(app.getProperty("ftp.login"), app.getProperty("ftp.password"));
         ftp.deleteFile(backup);
         ftp.rename(target, backup);
-        ftp.enterRemotePassiveMode();
+        //ftp.enterRemotePassiveMode();
         ftp.storeFile(target, new FileInputStream(file));
         ftp.disconnect();
     }
