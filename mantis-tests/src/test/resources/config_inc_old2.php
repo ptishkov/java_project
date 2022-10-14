@@ -5,9 +5,9 @@ $g_database_name          = 'bugtracker';
 $g_db_username            = 'root';
 $g_db_password            = '';
 
-$g_default_timezone       = 'Europe/Moscow';
+$g_default_timezone       = 'Europe/Berlin';
 
-$g_crypto_master_salt     = '4g5wPD6cHtdWjRfpfBmklXJwXRbeVFmd31eB7wft7f0=';
+$g_crypto_master_salt     = 'rzRFDuD4dfqyM8rAjJApDJuG2KB/LGgEf4Yafut9h70=';
 $g_signup_use_captcha = OFF;
 $g_phpMailer_method = PHPMAILER_METHOD_SMTP;
 $g_smtp_host = 'localhost';
