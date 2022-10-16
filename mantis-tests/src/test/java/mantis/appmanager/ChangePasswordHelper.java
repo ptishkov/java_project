@@ -1,6 +1,10 @@
 package mantis.appmanager;
 
+import mantis.model.UserData;
+import mantis.model.Users;
 import org.openqa.selenium.By;
+
+import java.sql.*;
 
 public class ChangePasswordHelper extends HelperBase{
 
@@ -14,15 +18,11 @@ public class ChangePasswordHelper extends HelperBase{
         type(By.name("password"), app.getProperty("web.adminPassword"));
         wd.findElement(By.xpath("//input[@value='Войти']")).click();
     }
-    public void start() {
+    public void start(int id) {
         wd.get(app.getProperty("web.baseUrl") + "account_page.php");
         wd.findElement(By.linkText("управление")).click();
-        wd.get(app.getProperty("web.baseUrl") + "manage_overview_page.php");
         wd.findElement(By.cssSelector("ul.menu > li > a")).click();
-        wd.get(app.getProperty("web.baseUrl") + "manage_user_page.php");
-        wd.findElement(By.xpath("//tr[2]/td/a")).click();
-        wd.get(app.getProperty("web.baseUrl") + "manage_user_edit_page.php?user_id=3");
-        //wd.get(app.getProperty("web.baseUrl") + "manage_user_edit_page.php?user_id=" + userIdFromDB);
+        wd.findElement(By.xpath("//tr[" + (id - 1) + "]/td/a")).click();
         wd.findElement(By.xpath("//input[@value='Сбросить пароль']")).click();
     }
     public void finish(String changePasswordLink, String password) {
@@ -30,8 +30,38 @@ public class ChangePasswordHelper extends HelperBase{
         type(By.name("password"), password);
         type(By.name("password_confirm"), password);
         wd.findElement(By.xpath("//input[@value='Изменить учетную запись']")).click();
-        //Чтобы можно было руками проверить логин, вывод пароля в консоль
-        System.out.println("Пароль пользователя успешно изменён! Новый пароль: " + password);
+    }
+
+    public void getUsersData(Users users) {
+        Connection conn = null;
+        try {
+            conn =
+                    DriverManager.getConnection("jdbc:mysql://localhost/bugtracker?" +
+                            "user=root&password=");
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery("select id, username, email from mantis_user_table");
+            while (rs.next()) {
+                users.add(new UserData().withId(rs.getInt("id")).withUsername(rs.getString("username"))
+                        .withEmail(rs.getString("email")));
+            }
+            rs.close();
+            st.close();
+            conn.close();
+        } catch (SQLException ex) {
+            // handle any errors
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+    }
+
+    public UserData tickUser(Users users) {
+        for (UserData u : users) {
+            if (u.getId() != 1) {
+                return new UserData().withId(u.getId()).withUsername(u.getUsername()).withEmail(u.getEmail());
+            }
+        }
+        return null;
     }
 
 }
