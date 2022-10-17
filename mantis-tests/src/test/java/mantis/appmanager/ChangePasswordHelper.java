@@ -18,11 +18,11 @@ public class ChangePasswordHelper extends HelperBase{
         type(By.name("password"), app.getProperty("web.adminPassword"));
         wd.findElement(By.xpath("//input[@value='Войти']")).click();
     }
-    public void start(int id) {
+    public void start(String username) {
         wd.get(app.getProperty("web.baseUrl") + "account_page.php");
         wd.findElement(By.linkText("управление")).click();
         wd.findElement(By.cssSelector("ul.menu > li > a")).click();
-        wd.findElement(By.xpath("//tr[" + (id - 1) + "]/td/a")).click();
+        wd.findElement(By.linkText(username)).click();
         wd.findElement(By.xpath("//input[@value='Сбросить пароль']")).click();
     }
     public void finish(String changePasswordLink, String password) {

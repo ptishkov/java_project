@@ -36,7 +36,7 @@ public class ChangePasswordTests  extends TestBase {
         //1. Администратор заходит в мантис
         app.changePassword().login();
         //2. Выбор пользователя + нажатие кнопки "Сбросить пароль"
-        app.changePassword().start(user.getId());
+        app.changePassword().start(user.getUsername());
         //3. Отлавливаем письмо на почту
         List<MailMessage> mailMessages = app.mail().waitForMail(1, 10000);
         String changePasswordLink = findChangePasswordLink(mailMessages, user.getEmail());
