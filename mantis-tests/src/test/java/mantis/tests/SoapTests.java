@@ -1,5 +1,6 @@
 package mantis.tests;
 
+import biz.futureware.mantis.rpc.soap.client.IssueData;
 import mantis.model.Issue;
 import mantis.model.Project;
 import org.testng.Assert;
@@ -9,6 +10,8 @@ import javax.xml.rpc.ServiceException;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 import java.util.Set;
+
+import static org.testng.AssertJUnit.assertEquals;
 
 public class SoapTests extends TestBase{
 
@@ -29,4 +32,14 @@ public class SoapTests extends TestBase{
         Issue created = app.soap().addIssue(issue);
         Assert.assertEquals(issue.getSummary(), created.getSummary());
     }
+    @Test
+    public void testCreateIssueWithSkip() throws MalformedURLException, ServiceException, RemoteException {
+            skipIfNotFixed(2);
+            Set<Project> projects = app.soap().getProjects();
+            Issue issue = new Issue().withSummary("Bug report").withDescription("Description")
+                    .withProject(projects.iterator().next());
+            Issue created = app.soap().addIssue(issue);
+            assertEquals(issue.getSummary(), created.getSummary());
+        }
 }
+
