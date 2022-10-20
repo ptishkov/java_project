@@ -13,15 +13,28 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 import java.util.Set;
 
-public class RestTests {
+public class RestTests extends TestBase{
     @Test
     public void testCreateIssue() throws IOException {
         Set<Issue> oldIssues = getIssues();
-        Issue newIssue = new Issue().withSubject("Test issue").withDescription("New test issue");
+        Issue newIssue = new Issue().withSubject("Tishkov").withDescription("Pavel");
         int issueId = createIssue(newIssue);
         Set<Issue> newIssues = getIssues();
         oldIssues.add(newIssue.withId(issueId));
         Assert.assertEquals(newIssues, oldIssues);
+    }
+    @Test
+    public void testCreateIssueWithSkip() throws IOException {
+        if(isIssueOpen(2328)){
+            skipIfNotFixed(2328);
+        } else {
+            Set<Issue> oldIssues = getIssues();
+            Issue newIssue = new Issue().withSubject("TishkovNew").withDescription("Pavel Vladimirovich");
+            int issueId = createIssue(newIssue);
+            Set<Issue> newIssues = getIssues();
+            oldIssues.add(newIssue.withId(issueId));
+            Assert.assertEquals(newIssues, oldIssues);
+        }
     }
 
     private Set<Issue> getIssues() throws IOException {
