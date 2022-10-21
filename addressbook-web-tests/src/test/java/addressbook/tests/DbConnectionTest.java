@@ -3,7 +3,6 @@ package addressbook.tests;
 
 import addressbook.model.GroupData;
 import addressbook.model.Groups;
-import com.sun.deploy.net.MessageHeader;
 import org.testng.annotations.Test;
 
 import java.sql.*;
